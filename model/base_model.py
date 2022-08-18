@@ -6,7 +6,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from backend import DummyNetFeature, InceptionV3Feature, VGG16Feature, ResNet50Feature, MobileNetV2Feature
 from backend import InceptionResNetV2Feature
-from utils.utils import make_batches
+from utils import make_batches
 from top_models import glob_pool_norm, glob_pool, glob_softmax
 from keras.callbacks import EarlyStopping, ModelCheckpoint, CSVLogger
 

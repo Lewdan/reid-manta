@@ -16,7 +16,7 @@ from model.triplet_pose_model import TripletLossPoseInv
 from model.classification_model import Classification
 from utils.batch_generators import BatchGenerator, PairsImageDataGenerator
 from utils.preprocessing import read_dataset, analyse_dataset, split_classes, split_classification
-from utils.utils import print_nested, save_res_csv
+from utils import print_nested, save_res_csv
 from evaluation.evaluate_accuracy import evaluate_1_vs_all
 
 argparser = argparse.ArgumentParser(description='Train and validate a model on any dataset')
