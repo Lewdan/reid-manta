@@ -4,7 +4,7 @@ from sklearn.utils import shuffle
 
 import sys, os
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-from utils.utils import rem_dupl
+from utils import rem_dupl
 from metrics import acck, mapk
 
 

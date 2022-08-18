@@ -9,7 +9,7 @@ from scipy.special import comb
 import sys
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from base_model import BaseModel
-from utils.tensorflow_losses import triplet_semihard_loss, lifted_struct_loss
+from tensorflow_losses import triplet_semihard_loss, lifted_struct_loss
 from utils import plot_model_loss_csv
 
 from evaluation.metrics import distance

@@ -3,13 +3,13 @@ from keras.optimizers import Adam
 import keras.backend as K
 from keras.preprocessing.image import ImageDataGenerator
 
-from model.base_model import BaseModel
-from utils.tensorflow_losses import triplet_semihard_loss
-from utils.custom_losses import triplet_pose_loss, semihard_pose_loss, triplet_loss_mult, pose_variance
-from utils.utils import plot_model_loss_csv
-from utils.utils import make_batches
+from base_model import BaseModel
+from tensorflow_losses import triplet_semihard_loss
+from custom_losses import triplet_pose_loss, semihard_pose_loss, triplet_loss_mult, pose_variance
+from utils import plot_model_loss_csv
+from utils import make_batches
 from scipy.special import comb
-from evaluation.metrics import distance
+from metrics import distance
 
 
 class TripletLossPoseInv(BaseModel):

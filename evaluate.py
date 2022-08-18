@@ -8,8 +8,8 @@ from datetime import datetime
 from model.triplet import TripletLoss
 from model.siamese import Siamese
 from model.triplet_pose_model import TripletLossPoseInv
-from utils.utils import print_nested, save_res_csv, export_emb
-from utils.preprocessing import read_dataset, analyse_dataset, split_classes
+from utils import print_nested, save_res_csv, export_emb
+from preprocessing import read_dataset, analyse_dataset, split_classes
 from evaluation.evaluate_pairs import evaluate_pairs
 from evaluation.evaluate_accuracy import evaluate_1_vs_all
 
