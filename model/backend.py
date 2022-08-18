@@ -1,7 +1,7 @@
 from keras.models import Model
 import numpy as np
 from keras.layers import Reshape, Activation, Conv2D, Input, MaxPooling2D, BatchNormalization, Flatten, Dense, Lambda
-from keras.applications.mobilenetv2 import MobileNetV2
+from keras.applications import MobileNetV2
 from keras.applications.vgg16 import VGG16, preprocess_input
 from keras.applications.resnet50 import ResNet50
 from keras.applications import InceptionResNetV2, DenseNet121, InceptionV3
