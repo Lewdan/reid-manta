@@ -167,8 +167,7 @@ def _main_(args):
     ##############################
     #   Load initial weights 
     ##############################
-    SAVED_WEIGHTS = os.path.join(exp_folder,
-                                 'weights_at_20220825-134007_iter_29.h5')  # todo: change back to best_weights.h5
+    SAVED_WEIGHTS = os.path.join(exp_folder, 'weights_at_20220825-134007_iter_29.h5')  # todo: change back to best_weights.h5
     PRETRAINED_WEIGHTS = config['train']['pretrained_weights']
 
     if os.path.exists(SAVED_WEIGHTS):
