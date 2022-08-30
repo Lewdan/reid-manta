@@ -49,9 +49,9 @@ README:
 import numpy as np
 import os, argparse, json
 
-from utils.preprocessing import crop_im_by_mask, resize_imgs, convert_to_fmt
-from utils.drawer import MaskDrawer
-from utils.utils import str2bool
+from preprocessing import crop_im_by_mask, resize_imgs, convert_to_fmt
+from drawer import MaskDrawer
+from utils import str2bool
 
 argparser = argparse.ArgumentParser(description='Prepare database from the data')
 

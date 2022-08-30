@@ -238,7 +238,8 @@ def crop_im_by_box(filename, bbox, verbose=False):
     except Exception as e:
         print(e)
         print('Not found {}'.format(filename))
-    
+
+
 def read_dataset(img_dir, data_type='uint8', return_filenames=False, original_labels=False):
     """Read a dataset from a directory where each class is in a subdirectory:
     img_dir: string, path to image directory
@@ -311,7 +312,7 @@ def read_dataset(img_dir, data_type='uint8', return_filenames=False, original_la
     else:
         return X, y, class_dict
 
-def split_classes(dataset, labels, test_size=0.15, seed=None, return_mask=False, split_num=-1):
+def split_classes(dataset, labels, test_size=0.4, seed=None, return_mask=False, split_num=-1):
     '''Split dataset and labels into train and validation without class overlap
     
     Input:
@@ -333,7 +334,6 @@ def split_classes(dataset, labels, test_size=0.15, seed=None, return_mask=False,
   
     if split_num == -1:
         lbls_train, lbls_valid = train_test_split(unique_lbls, test_size=test_size, random_state=seed)
-    
     else:
         print('K-Fold split. Loading data for the split: {}'.format(split_num))
         n_splits = 5

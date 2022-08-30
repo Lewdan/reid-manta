@@ -34,8 +34,8 @@ import argparse, os, json
 import numpy as np
 
 from model.triplet import TripletLoss
-from utils.utils import export_emb
-from utils.preprocessing import read_dataset
+from utils import export_emb
+from preprocessing import read_dataset
 
 argparser = argparse.ArgumentParser(
     description='Compute embeddings for the database. No arguments are required if default values are used.')

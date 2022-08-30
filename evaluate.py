@@ -74,6 +74,7 @@ def _main_(args):
         imgs, labels, lbl2names, filenames = read_dataset(config['data']['train_image_folder'], return_filenames=True)
         train_imgs, train_labels, test_imgs, test_labels, mask_train = split_classes(imgs, labels,
                                                                                      seed=config['data']['split_seed'],
+                                                                                     test_size=config['evaluate']['test_size'],
                                                                                      split_num=split_num,
                                                                                      return_mask=True)
         # Get filenames and names

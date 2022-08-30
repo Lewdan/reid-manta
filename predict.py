@@ -32,11 +32,11 @@ from imageio import imread
 import matplotlib.pyplot as plt
 from glob import glob
 
-from utils.drawer import MaskDrawer
+from drawer import MaskDrawer
 
 from model.triplet import TripletLoss
-from utils.utils import export_emb, print_nested, str2bool
-from utils.preprocessing import crop_im_by_mask, resize_imgs, convert_to_fmt
+from utils import export_emb, print_nested, str2bool
+from preprocessing import crop_im_by_mask, resize_imgs, convert_to_fmt
 from evaluation.evaluate_accuracy import predict_k_neigh
 
 argparser = argparse.ArgumentParser(
@@ -148,7 +148,7 @@ if __name__ == "__main__":
     mymodel = TripletLoss(**model_args)
 
     exp_folder = os.path.join(config['train']['exp_dir'], config['train']['exp_id'])
-    saved_weights = os.path.join(exp_folder, 'best_weights.h5')
+    saved_weights = os.path.join(exp_folder, 'weights_at_20220825-134007_iter_29.h5') # todo: change back to best_weights.h5
     
     if os.path.exists(saved_weights):
         print("Loading saved weights in ", saved_weights)
