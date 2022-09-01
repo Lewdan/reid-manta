@@ -351,6 +351,10 @@ def _main_(args):
 
             wandb.log({'acc1': result['acc1'], 'acc5': result['acc5']})
 
+            data = [[e, I] for (e, I) in zip(np.arange(10), np.random.rand(10))] #generate 10 epochs (np.arrange) and 10 random values for the loss (np.random.rand)
+            table = wandb.Table(data=data, columns=['epoch', 'loss']) #turn the data into a wandb table with named columns
+            wandb.log({'test_plot': wandb.plot.line(table, 'epoch', 'loss', title='loss vs epoch')}) #log to wandb
+
         if iteration % 50 and iteration > 0:
             time_finish = datetime.now().strftime("%Y%m%d-%H%M%S") + '_iter_' + str(iteration)
             TEMP_WEIGHTS = os.path.join(exp_folder, 'weights_at_' + time_finish + '.h5')
