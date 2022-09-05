@@ -4,7 +4,6 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import wandb
-from wandb.keras import WandbCallback
 import tensorflow as tf
 
 import numpy as np
@@ -22,6 +21,7 @@ from batch_generators import BatchGenerator, PairsImageDataGenerator
 from preprocessing import read_dataset, analyse_dataset, split_classes, split_classification
 from utils import print_nested, save_res_csv
 from evaluation.evaluate_accuracy import evaluate_1_vs_all
+from sklearn.datasets import load_digits
 
 argparser = argparse.ArgumentParser(description='Train and validate a model on any dataset')
 
@@ -167,7 +167,7 @@ def _main_(args):
     ##############################
     #   Load initial weights 
     ##############################
-    SAVED_WEIGHTS = os.path.join(exp_folder, 'weights_at_20220825-134007_iter_29.h5')  # todo: change back to best_weights.h5
+    SAVED_WEIGHTS = os.path.join(exp_folder, 'weights_at_20220830-132352_last.h5')  # todo: change back to best_weights.h5
     PRETRAINED_WEIGHTS = config['train']['pretrained_weights']
 
     if os.path.exists(SAVED_WEIGHTS):
@@ -354,6 +354,23 @@ def _main_(args):
             data = [[e, I] for (e, I) in zip(np.arange(10), np.random.rand(10))] #generate 10 epochs (np.arrange) and 10 random values for the loss (np.random.rand)
             table = wandb.Table(data=data, columns=['epoch', 'loss']) #turn the data into a wandb table with named columns
             wandb.log({'test_plot': wandb.plot.line(table, 'epoch', 'loss', title='loss vs epoch')}) #log to wandb
+
+            #load dataset
+            ds = load_digits(as_frame=True)
+            df = ds.data
+
+            #create a 'target' column
+            df["target"] = ds.target.astype(str)
+            cols = df.columns.tolist()
+            df = df[cols[-1:] + cols[:-1]]
+
+            #create an "image" column
+            df["image"] = df.apply(lambda row: wandb.Image(row[1:].values.reshape(8, 8) / 16.0), axis=1)
+            cols = df.columns.tolist()
+            df = df[cols[-1:] + cols[:-1]]
+
+            wandb.log({"digits": df})
+
 
         if iteration % 50 and iteration > 0:
             time_finish = datetime.now().strftime("%Y%m%d-%H%M%S") + '_iter_' + str(iteration)
