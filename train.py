@@ -32,29 +32,6 @@ argparser.add_argument('-s', '--split_num', help='index of split for K-fold: num
 
 def _main_(args):
     wandb.init(project="catinitial")
-    # wandb.config.update("catinitial.json")
-
-    # wandb_callback = WandbCallback(monitor='vale_loss',
-    # log_weights=True,
-    # log_evaluation = True,
-    # validation_steps = 5)
-    # examples = []
-    # for i in range(3):
-    # pixels = np.random.randint(low=0, high=256, size=(100, 100, 3))
-    # image = wandb.Image(pixels, caption=f"random field {i}")
-    # examples.append(image)
-    # wandb.log({"examples": examples})
-    # wandb.log(result)
-
-    # wandb.log({"loss": 0.2}, commit=False)
-    # wandb.log({"accuracy": 0.9, "epoch": 300, "learning_rate": 0.01})
-
-    # with tf.Session() as sess:
-    # wandb.tensorflow.log(tf.summary.merge_all())
-    # wandb.init(config=tf.flags.FLAGS, sync_tensorboard=True)
-    # log =
-    # callbacks=[WandbCallback()]
-    # wandb.log = (callbacks)
 
     # Record start time:
     startTime = datetime.now()
@@ -354,23 +331,6 @@ def _main_(args):
             data = [[e, I] for (e, I) in zip(np.arange(10), np.random.rand(10))] #generate 10 epochs (np.arrange) and 10 random values for the loss (np.random.rand)
             table = wandb.Table(data=data, columns=['epoch', 'loss']) #turn the data into a wandb table with named columns
             wandb.log({'test_plot': wandb.plot.line(table, 'epoch', 'loss', title='loss vs epoch')}) #log to wandb
-
-            #load dataset
-            ds = load_digits(as_frame=True)
-            df = ds.data
-
-            #create a 'target' column
-            df["target"] = ds.target.astype(str)
-            cols = df.columns.tolist()
-            df = df[cols[-1:] + cols[:-1]]
-
-            #create an "image" column
-            df["image"] = df.apply(lambda row: wandb.Image(row[1:].values.reshape(8, 8) / 16.0), axis=1)
-            cols = df.columns.tolist()
-            df = df[cols[-1:] + cols[:-1]]
-
-            wandb.log({"digits": df})
-
 
         if iteration % 50 and iteration > 0:
             time_finish = datetime.now().strftime("%Y%m%d-%H%M%S") + '_iter_' + str(iteration)
