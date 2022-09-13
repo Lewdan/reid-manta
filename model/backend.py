@@ -51,7 +51,6 @@ class DummyNetFeature(BaseFeatureExtractor):
 class InceptionV3Feature(BaseFeatureExtractor):
     """Inception V3 model pretrained on Imagenet"""
     def __init__(self, input_shape, weights):
-       
         self.feature_extractor = InceptionV3(input_shape=input_shape, include_top=False, weights=weights)
 
     def normalize(self, image):

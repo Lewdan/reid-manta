@@ -95,7 +95,7 @@ def _main_(args):
             
     #Define folder for experiment
     exp_folder = os.path.join(config['train']['exp_dir'], config['train']['exp_id'])
-    saved_weights = os.path.join(exp_folder, 'weights_at_20220825-134007_iter_29.h5') # todo: change back to best_weights.h5
+    saved_weights = os.path.join(exp_folder, 'best_weights.h5') # todo: change back to best_weights.h5
     
     if os.path.exists(saved_weights):
         print("Loading saved weights in ", saved_weights)

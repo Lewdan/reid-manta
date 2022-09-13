@@ -9,6 +9,7 @@ import tensorflow as tf
 import numpy as np
 from math import ceil
 from datetime import datetime
+
 from keras.preprocessing.image import ImageDataGenerator
 import keras.backend as K
 from keras.utils import to_categorical
@@ -23,6 +24,11 @@ from utils import print_nested, save_res_csv
 from evaluation.evaluate_accuracy import evaluate_1_vs_all
 from sklearn.datasets import load_digits
 
+# Just disables the warning, doesn't take advantage of AVX/FMA to run faster
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # no warnings about cpu instructions
+
+
 argparser = argparse.ArgumentParser(description='Train and validate a model on any dataset')
 
 argparser.add_argument('-c', '--conf', help='path to the configuration file', default='config.json')
@@ -31,7 +37,7 @@ argparser.add_argument('-s', '--split_num', help='index of split for K-fold: num
 
 
 def _main_(args):
-    wandb.init(project="catinitial")
+    # wandb.init(project="feralcat")
 
     # Record start time:
     startTime = datetime.now()
@@ -170,7 +176,7 @@ def _main_(args):
                         fill_mode='nearest',
                         preprocessing_function=mymodel.backend_class.normalize)
     elif config['train']['aug_rate'] == 'cat':
-        gen_args = dict(rotation_range=15,
+        gen_args = dict(rotation_range=15, # todo change back to 15
                         width_shift_range=0.1,
                         height_shift_range=0.1,
                         zoom_range=0.2,
@@ -328,9 +334,12 @@ def _main_(args):
 
             wandb.log({'acc1': result['acc1'], 'acc5': result['acc5']})
 
-            data = [[e, I] for (e, I) in zip(np.arange(10), np.random.rand(10))] #generate 10 epochs (np.arrange) and 10 random values for the loss (np.random.rand)
-            table = wandb.Table(data=data, columns=['epoch', 'loss']) #turn the data into a wandb table with named columns
-            wandb.log({'test_plot': wandb.plot.line(table, 'epoch', 'loss', title='loss vs epoch')}) #log to wandb
+            #data = [[e, I] for (e, I) in zip(np.arange(10), np.random.rand(10))] #generate 10 epochs (np.arrange) and 10 random values for the loss (np.random.rand)
+            #table = wandb.Table(data=data, columns=['epoch', 'loss']) #turn the data into a wandb table with named columns
+            #wandb.log({'test_plot': wandb.plot.line(table, 'epoch', 'loss', title='loss vs epoch')}) #log to wandb
+
+            # del data
+            # del table
 
         if iteration % 50 and iteration > 0:
             time_finish = datetime.now().strftime("%Y%m%d-%H%M%S") + '_iter_' + str(iteration)

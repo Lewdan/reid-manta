@@ -2,15 +2,15 @@ import pandas as pd
 import cv2
 import wandb
 from pathlib import Path
-#wandb.init(project='test')
+wandb.init(project="catno_aug")
 
 
 ## defining a path - change to the location of desired embeddings + label csv
-emb = 'catinitial-db_emb.csv'
-filepath_emb = Path().cwd() / 'reid-manta' /'examples'/'catinitial' / 'db_embs' / emb
+emb = 'catno_aug-db_emb.csv'
+filepath_emb = Path().cwd() / 'reid-manta' /'examples'/'catno_aug' / 'db_embs' / emb
 
-lbl = 'catinitial-db_lbl.csv'
-filepath_lbl = Path().cwd() /'reid-manta' /'examples'/'catinitial' / 'db_embs' / lbl
+lbl = 'catno_aug-db_lbl.csv'
+filepath_lbl = Path().cwd() /'reid-manta' /'examples'/'catno_aug' / 'db_embs' / lbl
 
 ## read in the filepath
 df = pd.read_csv(filepath_emb)
@@ -44,5 +44,5 @@ df = df[cols[-1:] + cols[:-1]]
 
 
 #To log to wandb
-#wandb.log({"test_09": df})
+wandb.log({"catno_aug": df})
 #wandb.log({'test_image_rgb': wandb.Image(im_rgb)})
